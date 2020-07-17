@@ -81,7 +81,13 @@ class App extends React.Component {
           />
           <Route
             path="/users/:id"
-            component={UserContainer}
+            render={({ match }) => (
+              <UserContainer
+                messages={this.state.messages}
+                messagesLoaded={this.state.messagesLoaded}
+                userID={match.params.id}
+              />
+            )}
           />
         </Switch>
       </div>

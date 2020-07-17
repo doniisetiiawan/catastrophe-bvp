@@ -2,8 +2,8 @@
 
 body {
   height: 100vh;
-  background: linear-gradient(to bottom, #FD8271 , #A62824);
-  font-family: 'Khula', sans-serif;
+  background: linear-gradient(to bottom, #fd8271, #a62824);
+  font-family: "Khula", sans-serif;
   color: #2f2f2f;
   overflow: hidden;
   margin: 0 8px;
@@ -72,25 +72,38 @@ body {
   align-items: center;
 }
 
-#loading-container img, #test-image {
+#loading-container img,
+#test-image {
   width: 100px;
   -webkit-animation-name: pulse;
   animation-name: pulse;
   animation-duration: 1000ms;
-  transform-origin:70% 70%;
+  transform-origin: 70% 70%;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
 
 @-webkit-keyframes pulse {
-  0% { -webkit-transform: scale(1); }
-  50% { -webkit-transform: scale(1.2); }
-  100% { -webkit-transform: scale(1); }
+  0% {
+    -webkit-transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.2);
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
 }
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* End Initial Styles */
@@ -99,27 +112,29 @@ body {
   margin-top: 20px;
 }
 
-h1, p {
+h1,
+p {
   margin: 0;
 }
 
-button, input {
+button,
+input {
   border: none;
   background-color: white;
 }
 
 input {
-  border: 1px solid rgba(0,0,0,.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0 5px;
 }
 
 button:hover {
   cursor: pointer;
-  opacity: .75;
+  opacity: 0.75;
 }
 
 button.red {
-  background-color: #A62824;
+  background-color: #a62824;
   color: white;
   padding: 7px 10px;
   border-radius: 3px;
@@ -127,7 +142,7 @@ button.red {
 }
 
 button.red.light {
-  background-color: #A62824;
+  background-color: #a62824;
 }
 
 button.red:focus {
@@ -147,7 +162,7 @@ button.red:focus {
   width: 85%;
   border-radius: 10px;
   border: none;
-  border: 1px solid rgba(0,0,0,.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 5px 8px;
   float: left;
 }
@@ -170,7 +185,7 @@ button.red:focus {
 }
 
 #ChatContainer #chat-input button:hover svg path {
-  fill: #A62824;
+  fill: #a62824;
 }
 
 #message-container {
@@ -181,7 +196,6 @@ button.red:focus {
 
 .message {
   margin: 7px 0;
-
 }
 
 .message p {
@@ -199,17 +213,18 @@ button.red:focus {
   text-decoration: none;
 }
 
-.message a:visited, .message a {
+.message a:visited,
+.message a {
   color: black;
 }
 
 .message a:hover {
-  color: #A62824;
+  color: #a62824;
 }
 
 .message p.author {
   background-color: white;
-  font-size: .8em;
+  font-size: 0.8em;
   display: block;
   text-decoration: none;
 }
@@ -225,8 +240,8 @@ button.red:focus {
 }
 
 #LoginContainer form p {
-  font-size: .8em;
-  text-align:center;
+  font-size: 0.8em;
+  text-align: center;
 }
 
 #LoginContainer form input {
