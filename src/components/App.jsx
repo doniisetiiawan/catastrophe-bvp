@@ -18,6 +18,7 @@ class App extends React.Component {
     this.state = {
       user: null,
       messages: [],
+      messagesLoaded: false,
     };
   }
 
@@ -32,6 +33,9 @@ class App extends React.Component {
 
     db.ref('messages').on('value', (snapshot) => {
       this.onMessage(snapshot);
+      if (!this.state.messagesLoaded) {
+        this.setState({ messagesLoaded: true });
+      }
     });
   };
 
@@ -68,7 +72,9 @@ class App extends React.Component {
             path="/"
             render={() => (
               <ChatContainer
+                messagesLoaded={this.state.messagesLoaded}
                 onSubmit={this.handleSubmitMessage}
+                user={this.state.user}
                 messages={this.state.messages}
               />
             )}

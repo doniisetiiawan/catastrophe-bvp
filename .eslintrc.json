@@ -17,6 +17,7 @@
   "rules": {
     "no-console": "off",
     "react/destructuring-assignment": "off",
+    "consistent-return": "off",
     "react/jsx-one-expression-per-line": "off"
   }
 }
