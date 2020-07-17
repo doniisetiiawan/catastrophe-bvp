@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Header from './header';
 import { auth } from '../services/firebase';
@@ -36,7 +37,7 @@ class LoginContainer extends Component {
         this.state.password,
       )
       .then((res) => {
-        console.log(res);
+        this.onLogin();
       })
       .catch((err) => {
         if (err.code === 'auth/user-not-found') {
@@ -60,6 +61,10 @@ class LoginContainer extends Component {
         console.log(error);
         this.setState({ error: 'Error signing up.' });
       });
+  };
+
+  onLogin = () => {
+    this.props.history.push('/');
   };
 
   render() {
@@ -94,3 +99,7 @@ class LoginContainer extends Component {
 }
 
 export default LoginContainer;
+
+LoginContainer.propTypes = {
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
+};

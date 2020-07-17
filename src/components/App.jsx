@@ -1,7 +1,10 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import LoginContainer from './loginContainer';
-import './App.css';
 import { auth } from '../services/firebase';
+import ChatContainer from './ChatContainer';
+import './App.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,6 +19,8 @@ class App extends React.Component {
     auth.onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user });
+      } else {
+        this.props.history.push('/login');
       }
     });
   };
@@ -23,10 +28,17 @@ class App extends React.Component {
   render() {
     return (
       <div id="container">
-        <LoginContainer />
+        <Switch>
+          <Route path="/login" component={LoginContainer} />
+          <Route exact path="/" component={ChatContainer} />
+        </Switch>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
+
+App.propTypes = {
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
+};
