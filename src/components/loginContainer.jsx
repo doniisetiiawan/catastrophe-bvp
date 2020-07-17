@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import Firebase from 'firebase';
 import Header from './header';
-import config from '../services/config';
+import { auth } from '../services/firebase';
 
 class LoginContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = { email: '', password: '', error: '' };
-    if (!Firebase.apps.length) {
-      Firebase.initializeApp(config);
-    }
   }
 
   handleEmailChange = (event) => {
@@ -34,7 +30,7 @@ class LoginContainer extends Component {
   };
 
   login = () => {
-    Firebase.auth()
+    auth
       .signInWithEmailAndPassword(
         this.state.email,
         this.state.password,
@@ -52,7 +48,7 @@ class LoginContainer extends Component {
   };
 
   signup = () => {
-    Firebase.auth()
+    auth
       .createUserWithEmailAndPassword(
         this.state.email,
         this.state.password,

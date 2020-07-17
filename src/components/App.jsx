@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginContainer from './loginContainer';
 import './App.css';
-import Firebase from 'firebase';
+import { auth } from '../services/firebase';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class App extends React.Component {
   }
 
   componentDidMount = () => {
-    Firebase.auth().onAuthStateChanged((user) => {
+    auth.onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user });
       }
