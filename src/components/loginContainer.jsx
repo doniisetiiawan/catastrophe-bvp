@@ -36,7 +36,7 @@ class LoginContainer extends Component {
         this.state.email,
         this.state.password,
       )
-      .then((res) => {
+      .then(() => {
         this.onLogin();
       })
       .catch((err) => {
