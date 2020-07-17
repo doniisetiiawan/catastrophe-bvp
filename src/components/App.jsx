@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-state */
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
@@ -5,6 +6,7 @@ import LoginContainer from './loginContainer';
 import { auth } from '../services/firebase';
 import ChatContainer from './ChatContainer';
 import './App.css';
+import UserContainer from './UserContainer';
 
 class App extends React.Component {
   constructor(props) {
@@ -31,6 +33,7 @@ class App extends React.Component {
         <Switch>
           <Route path="/login" component={LoginContainer} />
           <Route exact path="/" component={ChatContainer} />
+          <Route path="/users/:id" component={UserContainer} />
         </Switch>
       </div>
     );
