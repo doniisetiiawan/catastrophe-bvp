@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Header from './header';
 import { auth } from '../services/firebase';
 
@@ -44,7 +45,18 @@ class ChatContainer extends Component {
             Logout
           </button>
         </Header>
-        <div id="message-container" />
+        <div id="message-container">
+          {this.props.messages.map((msg) => (
+            <div key={msg.id} className="message">
+              <p>{msg.msg}</p>
+              <p className="author">
+                <Link to={`/users/${msg.user_id}`}>
+                  {msg.author}
+                </Link>
+              </p>
+            </div>
+          ))}
+        </div>
         <div id="chat-input">
           <textarea
             placeholder="Add your message..."
@@ -52,10 +64,7 @@ class ChatContainer extends Component {
             onKeyDown={this.handleKeyDown}
             value={this.state.newMessage}
           />
-          <button
-            onClick={this.handleSubmit}
-            type="button"
-          >
+          <button onClick={this.handleSubmit} type="button">
             <svg viewBox="0 0 24 24">
               <path
                 fill="#424242"
@@ -72,5 +81,10 @@ class ChatContainer extends Component {
 export default ChatContainer;
 
 ChatContainer.propTypes = {
+  messages: PropTypes.arrayOf(PropTypes.object),
   onSubmit: PropTypes.func.isRequired,
+};
+
+ChatContainer.defaultProps = {
+  messages: [],
 };

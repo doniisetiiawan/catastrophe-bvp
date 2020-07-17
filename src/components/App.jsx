@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unused-state */
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
@@ -18,6 +17,7 @@ class App extends React.Component {
 
     this.state = {
       user: null,
+      messages: [],
     };
   }
 
@@ -29,6 +29,21 @@ class App extends React.Component {
         this.props.history.push('/login');
       }
     });
+
+    db.ref('messages').on('value', (snapshot) => {
+      this.onMessage(snapshot);
+    });
+  };
+
+  onMessage = (snapshot) => {
+    const messages = Object.keys(snapshot.val()).map(
+      (key) => {
+        const msg = snapshot.val()[key];
+        msg.id = key;
+        return msg;
+      },
+    );
+    this.setState({ messages });
   };
 
   handleSubmitMessage = (msg) => {
@@ -40,7 +55,7 @@ class App extends React.Component {
       user_id: this.state.user.uid,
     };
 
-    db.ref('messages/').push(data);
+    db.ref('messages').push(data);
   };
 
   render() {
@@ -54,6 +69,7 @@ class App extends React.Component {
             render={() => (
               <ChatContainer
                 onSubmit={this.handleSubmitMessage}
+                messages={this.state.messages}
               />
             )}
           />
