@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
+import Firebase from 'firebase';
 import Header from './header';
+import config from '../services/config';
 
 class LoginContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { email: '', password: '' };
+    this.state = { email: '', password: '', error: '' };
+    if (!Firebase.apps.length) {
+      Firebase.initializeApp(config);
+    }
   }
 
   handleEmailChange = (event) => {
@@ -18,7 +23,47 @@ class LoginContainer extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state);
+    this.setState({ error: '' });
+    if (this.state.email && this.state.password) {
+      this.login();
+    } else {
+      this.setState({
+        error: 'Please fill in both fields.',
+      });
+    }
+  };
+
+  login = () => {
+    Firebase.auth()
+      .signInWithEmailAndPassword(
+        this.state.email,
+        this.state.password,
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        if (err.code === 'auth/user-not-found') {
+          this.signup();
+        } else {
+          this.setState({ error: 'Error logging in.' });
+        }
+      });
+  };
+
+  signup = () => {
+    Firebase.auth()
+      .createUserWithEmailAndPassword(
+        this.state.email,
+        this.state.password,
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+        this.setState({ error: 'Error signing up.' });
+      });
   };
 
   render() {
@@ -42,6 +87,7 @@ class LoginContainer extends Component {
             value={this.state.password}
             placeholder="Your password"
           />
+          <p className="error">{this.state.error}</p>
           <button className="red light" type="submit">
             Login
           </button>
